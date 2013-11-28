@@ -16,6 +16,7 @@ import Controller.PemohonController;
 import Entity.DataPemohon;
 import Entity.DataPemohonSAW;
 import Entity.Kriteria;
+import LOGIN.HalamanUtamaForm1;
 import TableModel.DataPemohonKriteriaTableModel;
 import TableModel.DataPenerimaTableModel;
 import java.sql.SQLException;
@@ -35,14 +36,16 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
     PemohonController pemohonController;
     KriteriaController kriteriaController;
     DataPemohonSAW dataPemohonSAW;
+    HalamanUtamaForm1 halamanUtama;
     final double 
             RENDAH_MIN=0,RENDAH_MAKS=2.99,
             SEDANG_MIN=3.00,SEDANG_MAKS=4.99,
             TINGGI_MIN=5.00,TINGGI_MAKS=6.99
             ;
     /** Creates new form HalamanSimulasi1 */
-    public HalamanSimulasi1() {
+    public HalamanSimulasi1(HalamanUtamaForm1 halamanUtama) {
         initComponents();
+        this.halamanUtama=halamanUtama;
         rendahLabel.setText("Rendah "+RENDAH_MIN+" - "+RENDAH_MAKS);
         sedangLabel.setText("Sedang "+SEDANG_MIN+" - "+SEDANG_MAKS);
         tinggiLabel.setText("Tinggi "+TINGGI_MIN+" - "+TINGGI_MAKS);
@@ -149,6 +152,11 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
                 "NKK", "Nama Kepala Keluarga", "Alamat", "Hasil Keputusan"
             }
         ));
+        penerimaTabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                penerimaTabelMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(penerimaTabel);
 
         tutupButton.setText("TUTUP");
@@ -269,6 +277,13 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
         DataPenerimaTableModel dataPenerimaTableModel=new DataPenerimaTableModel(dataPenerimaList,patokanSkor);
         penerimaTabel.setModel(dataPenerimaTableModel);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void penerimaTabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penerimaTabelMouseClicked
+        DetailPemohonDialog dialog = new DetailPemohonDialog(dataPemohonList.get(penerimaTabel.getSelectedRow()),
+                halamanUtama, true);
+        dialog.setVisible(true);
+        
+    }//GEN-LAST:event_penerimaTabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

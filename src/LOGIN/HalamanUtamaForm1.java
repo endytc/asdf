@@ -282,7 +282,7 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.jDesktopPane1.removeAll();
         this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        HalamanSimulasi1 tambah = new HalamanSimulasi1();
+        HalamanSimulasi1 tambah = new HalamanSimulasi1(this);
         this.jDesktopPane1.add(tambah);
         int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
         this.setSize(tambah.getPreferredSize().width + 50, k);
