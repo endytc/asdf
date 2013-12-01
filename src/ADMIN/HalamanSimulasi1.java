@@ -157,6 +157,11 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
                 penerimaTabelMouseClicked(evt);
             }
         });
+        penerimaTabel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                penerimaTabelKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(penerimaTabel);
 
         tutupButton.setText("TUTUP");
@@ -279,11 +284,15 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void penerimaTabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penerimaTabelMouseClicked
-        DetailPemohonDialog dialog = new DetailPemohonDialog(dataPemohonList.get(penerimaTabel.getSelectedRow()),
+        DetailPemohonDialog dialog = new DetailPemohonDialog(dataPenerimaList.get(penerimaTabel.getSelectedRow()),
                 halamanUtama, true);
         dialog.setVisible(true);
         
     }//GEN-LAST:event_penerimaTabelMouseClicked
+
+    private void penerimaTabelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_penerimaTabelKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_penerimaTabelKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

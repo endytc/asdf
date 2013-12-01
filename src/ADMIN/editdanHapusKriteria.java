@@ -285,7 +285,7 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
             // TODO add your handling code here:
             Kriteria kriteriaBaru = new Kriteria();
             String kode_kriteria = kodekriteriaTF.getText();
-//            System.out.println(kodekriteriaTF.getText());
+            System.out.println(kodekriteriaTF.getText());
             String nama_kriteria = namaKriteriaTF.getText();
             double prioritas = nilaiPrioritas[tingkatPrioritasCB.getSelectedIndex()];
             kriteriaBaru.setId_kriteria(kode_kriteria);
