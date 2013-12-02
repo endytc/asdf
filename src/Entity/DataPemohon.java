@@ -124,7 +124,7 @@ public class DataPemohon {
                     isFound=true;
                 }
             }catch(Exception e){
-                System.err.println(e.getMessage()+" "+e.getClass());
+//                System.err.println(e.getMessage()+" "+e.getClass());
             }                
             if(!isFound)
                 i++;

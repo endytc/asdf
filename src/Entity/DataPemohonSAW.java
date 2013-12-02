@@ -49,6 +49,7 @@ public class DataPemohonSAW extends ArrayList<DataPemohon> {
         //normalisasi pegawai
         for (int i = 0; i < this.size(); i++) {
             for (int j = 0; j < kriteriaWargaMin.size(); j++) {
+                try{
                 this.get(i).findKriteriaWarga(
                         kriteriaWargaMin.get(j).getKriteria().getId_kriteria()
                     ).setNormalisasi(
@@ -57,6 +58,9 @@ public class DataPemohonSAW extends ArrayList<DataPemohon> {
                             kriteriaWargaMin.get(j).getKriteria().getId_kriteria()
                         ).getSkor()
                     );
+                }catch(NullPointerException e){
+//                    System.out.println(kriteriaWargaMin.get(j).getKriteria().getId_kriteria());
+                }
             }
         }
         return true;

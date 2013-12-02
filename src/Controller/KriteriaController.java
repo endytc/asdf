@@ -158,18 +158,28 @@ public class KriteriaController {
 
         java.sql.Statement statement = DatabaseConnection.getConnection().createStatement();
         statement.executeUpdate(sql1);
-        //insert subkriteria
-
+        String id_subkriteria="";
+        for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
+            if(i!=0){
+                id_subkriteria+=",";
+            }
+            id_subkriteria+="'"+dataKriteria.getSubkriteria().get(i).getId_subkriteriakriteria()+"'";
+        }
         String sql2 =
-                "DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "'";
+                "DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' and id_subkriteria not in("+id_subkriteria+")";
         statement.executeUpdate(sql2);
-
+        //insert subkriteria
         for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
             SubKriteria temp = dataKriteria.getSubkriteria().get(i);
-
-            String sql3 =
-                    "insert into subkriteria values ('" + temp.getId_subkriteriakriteria() + "','" + temp.getNama_subkriteria() + "','" + temp.getBobot_subkriteria() + "','" + kode_kriteria + "')";
-            statement.executeUpdate(sql3);
+            try{
+                String sql3 =
+                        "insert into subkriteria values ('" + temp.getId_subkriteriakriteria() + "','" + temp.getNama_subkriteria() + "','" + temp.getBobot_subkriteria() + "','" + kode_kriteria + "')";
+                statement.executeUpdate(sql3);
+            }catch(Exception e){
+                String sql3 ="UPDATE subkriteria SET id_subkriteria ='" + temp.getId_subkriteriakriteria() + "',nama_subkriteria='" + temp.getNama_subkriteria() + "',bobot_subkriteria=" + temp.getBobot_subkriteria() + " where id_kriteria ='" + kode_kriteria + "' and id_subkriteria = '" + temp.getId_subkriteriakriteria() + "' ";
+            //System.out.println(sql2);
+                statement.executeUpdate(sql3);
+            }
         }
     }
      public void deletepoinKriteria(Kriteria kr) throws SQLException {//ini belum selesai//
