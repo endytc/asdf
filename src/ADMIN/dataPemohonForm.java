@@ -61,27 +61,37 @@ List<DataPemohon> records = new ArrayList<DataPemohon>();
         saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pemohonTabel = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
+
+        setPreferredSize(new java.awt.Dimension(800, 458));
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setBackground(new java.awt.Color(204, 153, 255));
-        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Stencil", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setText("INPUT DATA PEMOHON");
 
-        nkkLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12));
+        nkkLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        nkkLabel.setForeground(new java.awt.Color(0, 0, 51));
         nkkLabel.setText("NKK");
 
-        namaKepalaKeluargaLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12));
+        namaKepalaKeluargaLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        namaKepalaKeluargaLabel.setForeground(new java.awt.Color(0, 0, 51));
         namaKepalaKeluargaLabel.setText("NAMA KEPALA KELUARGA");
 
-        alamatLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12));
+        alamatLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        alamatLabel.setForeground(new java.awt.Color(0, 0, 51));
         alamatLabel.setText("ALAMAT");
 
-        rtrwLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12));
+        rtrwLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        rtrwLabel.setForeground(new java.awt.Color(0, 0, 51));
         rtrwLabel.setText("RT/RW");
 
-        desaLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12));
+        desaLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        desaLabel.setForeground(new java.awt.Color(0, 0, 51));
         desaLabel.setText("DESA");
 
         nkkTF.addActionListener(new java.awt.event.ActionListener() {
@@ -130,25 +140,24 @@ List<DataPemohon> records = new ArrayList<DataPemohon>();
                     .addComponent(rtrwLabel)
                     .addComponent(desaLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nkkTF)
-                    .addComponent(namaKepalaKeluargaTF)
-                    .addComponent(alamatTF)
-                    .addComponent(rtrwTF)
-                    .addComponent(desaTF, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(saveButton)
+                        .addGap(50, 50, 50)
+                        .addComponent(editButton)
+                        .addGap(41, 41, 41)
+                        .addComponent(deleteButton))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(nkkTF)
+                        .addComponent(namaKepalaKeluargaTF)
+                        .addComponent(alamatTF)
+                        .addComponent(rtrwTF)
+                        .addComponent(desaTF, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(376, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(323, 323, 323))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(327, 327, 327)
-                .addComponent(saveButton)
-                .addGap(42, 42, 42)
-                .addComponent(editButton)
-                .addGap(35, 35, 35)
-                .addComponent(deleteButton)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addGap(274, 274, 274))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +191,8 @@ List<DataPemohon> records = new ArrayList<DataPemohon>();
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         pemohonTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -200,31 +211,36 @@ List<DataPemohon> records = new ArrayList<DataPemohon>();
         });
         jScrollPane2.setViewportView(pemohonTabel);
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -379,8 +395,8 @@ List<DataPemohon> records = new ArrayList<DataPemohon>();
     private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel namaKepalaKeluargaLabel;
     private javax.swing.JTextField namaKepalaKeluargaTF;
     private javax.swing.JLabel nkkLabel;

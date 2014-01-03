@@ -12,7 +12,9 @@ package ADMIN;
 
 import Controller.KriteriaController;
 import Entity.*;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -28,11 +30,12 @@ import javax.swing.table.DefaultTableModel;
 public class editdanHapusKriteria extends javax.swing.JPanel {
 
     private final double[] nilaiPrioritas = {1.0, 0.67, 0.33};
-    private boolean isSubKriteriaEdited = false;
-
+    private boolean isSubKriteriaDeleted = false;
+    ArrayList<SubKriteria> subKriteriaListToRemove;
     /** Creates new form editdanHapusKriteria */
     public editdanHapusKriteria() {
         initComponents();
+        subKriteriaListToRemove=new ArrayList<SubKriteria>();
     }
 
     /** This method is called from within the constructor to
@@ -50,16 +53,18 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
         namaKriteriaTF = new javax.swing.JTextField();
         tingkatPrioritasCBLabel = new javax.swing.JLabel();
         tingkatPrioritasCB = new javax.swing.JComboBox();
+        kriteriaLabel1 = new javax.swing.JLabel();
+        cariButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         kriteriaLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         subKriteriaTabel = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        kriteriaLabel1 = new javax.swing.JLabel();
         ubahButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        cariButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(153, 153, 255));
 
         kodeKriteriaLabel.setText("Kode Kriteria");
 
@@ -74,11 +79,29 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
             }
         });
 
-        kriteriaLabel.setFont(new java.awt.Font("Traditional Arabic", 1, 18));
+        kriteriaLabel1.setFont(new java.awt.Font("Stencil", 0, 18)); // NOI18N
+        kriteriaLabel1.setText("EDIT DAN DELETE KRITERIA ");
+
+        cariButton.setText("CARI");
+        cariButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariButtonActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 276));
+
+        kriteriaLabel.setBackground(new java.awt.Color(0, 0, 51));
+        kriteriaLabel.setFont(new java.awt.Font("Stencil", 0, 18)); // NOI18N
+        kriteriaLabel.setForeground(new java.awt.Color(0, 0, 51));
         kriteriaLabel.setText("SUB KRITERIA");
 
         subKriteriaTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -95,23 +118,6 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(subKriteriaTabel);
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Remove");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        kriteriaLabel1.setFont(new java.awt.Font("Traditional Arabic", 1, 18));
-        kriteriaLabel1.setText("EDIT DAN DELETE KRITERIA ");
-
         ubahButton.setText("UBAH");
         ubahButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,41 +132,65 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
             }
         });
 
-        cariButton.setText("CARI");
-        cariButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cariButtonActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
+
+        jButton2.setText("Remove");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(ubahButton)
+                .addGap(44, 44, 44)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(kriteriaLabel)
+                .addGap(323, 323, 323))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(kriteriaLabel)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ubahButton)
+                    .addComponent(jButton4))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(295, 295, 295)
-                                .addComponent(kriteriaLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(268, 268, 268)
-                                .addComponent(kriteriaLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,23 +200,21 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                             .addComponent(namaKriteriaLabel))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(namaKriteriaTF, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(kodekriteriaTF, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cariButton)
-                                .addGap(338, 338, 338))))
+                            .addComponent(namaKriteriaTF, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kodekriteriaTF, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(437, 471, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tingkatPrioritasCBLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(tingkatPrioritasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(99, 99, 99))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cariButton)
+                            .addComponent(tingkatPrioritasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(ubahButton)
-                .addGap(68, 68, 68)
-                .addComponent(jButton4)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addGap(295, 295, 295)
+                .addComponent(kriteriaLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +223,7 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(kodeKriteriaLabel)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(kodekriteriaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cariButton)))
+                    .addComponent(kodekriteriaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaKriteriaLabel)
@@ -206,22 +232,10 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tingkatPrioritasCBLabel)
                     .addComponent(tingkatPrioritasCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(kriteriaLabel)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ubahButton)
-                    .addComponent(jButton4))
-                .addGap(47, 47, 47))
+                .addGap(26, 26, 26)
+                .addComponent(cariButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -277,7 +291,7 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                 model.setValueAt("SUB-" + (i + 1), i, 0);
             }
         }
-        isSubKriteriaEdited = true;
+        isSubKriteriaDeleted = true;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ubahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahButtonActionPerformed
@@ -304,27 +318,45 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                 kriteriaBaru.addSubkriteria(sub);
             }
             KriteriaController pemkon = KriteriaController.getKriteriaKontrol();
-            if (isSubKriteriaEdited) {
-                pemkon.ubahDataKriteriaSubKriteria(kriteriaBaru);
+            boolean isSuccess=true;
+            if (isSubKriteriaDeleted) {
+                isSuccess=pemkon.ubahDataKriteriaSubKriteria(kriteriaBaru,subKriteriaListToRemove,this);
             } else {
-                pemkon.ubahDataKriteria(kriteriaBaru);
+                isSuccess=pemkon.ubahDataKriteria(kriteriaBaru);
             }
-            JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
-            isSubKriteriaEdited = false;
+            if(isSuccess){
+                JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
+                subKriteriaListToRemove=new ArrayList<SubKriteria>();
+            }else{
+                subKriteriaListToRemove=new ArrayList<SubKriteria>();
+                JOptionPane.showMessageDialog(this, "Data gagal disimpan");
+                this.cariButtonActionPerformed(evt);
+            }
+            subKriteriaListToRemove=new ArrayList<SubKriteria>();
+            isSubKriteriaDeleted = false;
+            
         } catch (SQLException ex) {
             Logger.getLogger(editdanHapusKriteria.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_ubahButtonActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          DefaultTableModel model = (DefaultTableModel) subKriteriaTabel.getModel();
         if (model.getRowCount() > 0) {
             if (subKriteriaTabel.getSelectedRow() != -1) {
+                SubKriteria s=new SubKriteria();
+//                "kode Sub Kriteria", "Nama Sub Kriteria", "Bobot"
+                s.setId_subkriteriakriteria(String.valueOf(subKriteriaTabel.getValueAt(subKriteriaTabel.getSelectedRow(), 0)));
+                s.setNama_subkriteria(String.valueOf(subKriteriaTabel.getValueAt(subKriteriaTabel.getSelectedRow(), 1)));
+                s.setBobot_subkriteria(Double.valueOf(String.valueOf(subKriteriaTabel.getValueAt(subKriteriaTabel.getSelectedRow(), 2))));
+                subKriteriaListToRemove.add(s);
                 model.removeRow(subKriteriaTabel.getSelectedRow());
             } else {
                 model.removeRow(model.getRowCount() - 1);
             }
+            //hitung ulang
             for (int i = 0; i < model.getRowCount(); i++) {
                 double row = (i + 1);
                 double bobot = row / model.getRowCount();
@@ -333,7 +365,7 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
                 model.setValueAt("SUB-" + (i + 1), i, 0);
             }
         }
-         isSubKriteriaEdited = true;
+         isSubKriteriaDeleted = true;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -357,8 +389,8 @@ public class editdanHapusKriteria extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel kodeKriteriaLabel;
     private javax.swing.JTextField kodekriteriaTF;
     private javax.swing.JLabel kriteriaLabel;

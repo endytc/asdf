@@ -19,6 +19,7 @@ import ADMIN.*;
 import ADMIN.HalamanSimulasi1;
 import ADMIN.HalamanEditKriteriaPemohon;
 import DBConn.DatabaseConnection;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -36,13 +37,13 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
     /** Creates new form HalamanUtamaForm1 */
     public HalamanUtamaForm1() {
         initComponents();
-        addWindowListener(new WindowAdapter() {
-
-            @Override
-            public void windowOpened(WindowEvent e) {
-                setExtendedState(MAXIMIZED_BOTH);
-            }
-        });
+//        addWindowListener(new WindowAdapter() {
+//
+////            @Override
+////            public void windowOpened(WindowEvent e) {
+////                setExtendedState(MAXIMIZED_BOTH);
+////            }
+//        });
     }
 
     /** This method is called from within the constructor to
@@ -54,12 +55,18 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        halamanInputKriteria1 = new ADMIN.HalamanInputKriteria();
+        halamanInputKriteriaPemohon1 = new ADMIN.HalamanInputKriteriaPemohon();
+        halamanEditKriteriaPemohon1 = new ADMIN.HalamanEditKriteriaPemohon();
+        editdanHapusKriteria1 = new ADMIN.editdanHapusKriteria();
+        dataPemohonForm1 = new ADMIN.dataPemohonForm();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         inputdataItem = new javax.swing.JMenuItem();
@@ -72,58 +79,77 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel1.setFont(new java.awt.Font("Aharoni", 1, 24));
-        jLabel1.setText("SISTEM PENDUKUNG KEPUTUSAN");
+        jPanel1.setBackground(new java.awt.Color(98, 120, 152));
 
-        jLabel2.setFont(new java.awt.Font("Aharoni", 1, 18));
-        jLabel2.setText("SELEKSI PENERIMAAN JAMINAN KESEHATAN DAERAH");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/JAMKESDA2.gif"))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Aharoni", 1, 24));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Stencil", 0, 24));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("KABUPATEN BOJONEGORO");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\IRE\\SKRIPSI\\SPPK(skripsi)\\Icon-Smile.jpg")); // NOI18N
-        jLabel4.setText("jLabel4");
+        jLabel2.setFont(new java.awt.Font("Stencil Std", 0, 20));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel2.setText("SELEKSI PENERIMAAN JAMINAN KESEHATAN DAERAH");
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel1.setFont(new java.awt.Font("Janda Manatee Bubble", 1, 30));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel1.setText("SISTEM PENDUKUNG KEPUTUSAN");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(118, 118, 118))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(258, 258, 258))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(109, 109, 109))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(262, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel3)))
-                .addGap(164, 164, 164))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(379, 379, 379)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
-
-        jPanel1.setBounds(0, 0, 890, 400);
-        jDesktopPane1.add(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        getContentPane().add(jDesktopPane1);
 
         fileMenu.setText("File");
         fileMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -206,8 +232,19 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-906)/2, (screenSize.height-438)/2, 906, 438);
+        setBounds((screenSize.width-816)/2, (screenSize.height-496)/2, 816, 496);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
@@ -217,13 +254,23 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 
     private void inputdataItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputdataItemActionPerformed
         // TODO add your handling code here:
-        this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        dataPemohonForm tambah = new dataPemohonForm();
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//        this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        dataPemohonForm tambah = new dataPemohonForm();
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.dataPemohonForm1 = new dataPemohonForm();
+    this.getContentPane().add(this.dataPemohonForm1, BorderLayout.CENTER);
+    int height = this.dataPemohonForm1.getPreferredSize().height + 50;
+    int width = this.dataPemohonForm1.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_inputdataItemActionPerformed
 
     private void fileMenuComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_fileMenuComponentMoved
@@ -232,35 +279,64 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 
     private void inputKriteriaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputKriteriaItemActionPerformed
         // TODO add your handling code here:
-        this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        HalamanInputKriteria tambah = new HalamanInputKriteria();
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//        this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        HalamanInputKriteria tambah = new HalamanInputKriteria();
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.halamanInputKriteria1 = new HalamanInputKriteria();
+    this.getContentPane().add(this.halamanInputKriteria1, BorderLayout.CENTER);
+    int height = this.halamanInputKriteria1.getPreferredSize().height + 50;
+    int width = this.halamanInputKriteria1.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_inputKriteriaItemActionPerformed
 
     private void inputKriteriaPemohonItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputKriteriaPemohonItemActionPerformed
         // TODO add your handling code here:
-       this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        HalamanInputKriteriaPemohon tambah = new HalamanInputKriteriaPemohon();
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//       this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        HalamanInputKriteriaPemohon tambah = new HalamanInputKriteriaPemohon();
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.halamanInputKriteriaPemohon1 = new HalamanInputKriteriaPemohon();
+    this.getContentPane().add(this.halamanInputKriteriaPemohon1, BorderLayout.CENTER);
+    int height = this.halamanInputKriteriaPemohon1.getPreferredSize().height + 50;
+    int width = this.halamanInputKriteriaPemohon1.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_inputKriteriaPemohonItemActionPerformed
 
     private void editDanHapusKriteriaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDanHapusKriteriaItemActionPerformed
         // TODO add your handling code here:
-         this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        editdanHapusKriteria  tambah = new editdanHapusKriteria();
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//         this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        editdanHapusKriteria  tambah = new editdanHapusKriteria();
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.editdanHapusKriteria1 = new editdanHapusKriteria();
+    this.getContentPane().add(this.editdanHapusKriteria1, BorderLayout.CENTER);
+    int height = this.editdanHapusKriteria1.getPreferredSize().height + 50;
+    int width = this.editdanHapusKriteria1.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_editDanHapusKriteriaItemActionPerformed
 
     private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed
@@ -269,24 +345,42 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 
     private void editKriteriaPemohonItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editKriteriaPemohonItemActionPerformed
         // TODO add your handling code here:
-        this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        HalamanEditKriteriaPemohon tambah = new HalamanEditKriteriaPemohon();
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//        this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        HalamanEditKriteriaPemohon tambah = new HalamanEditKriteriaPemohon();
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.halamanEditKriteriaPemohon1 = new HalamanEditKriteriaPemohon();
+    this.getContentPane().add(this.halamanEditKriteriaPemohon1, BorderLayout.CENTER);
+    int height = this.halamanEditKriteriaPemohon1.getPreferredSize().height + 50;
+    int width = this.halamanEditKriteriaPemohon1.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_editKriteriaPemohonItemActionPerformed
 
     private void simulasiItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulasiItemActionPerformed
         // TODO add your handling code here:
-         this.jDesktopPane1.removeAll();
-        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
-        HalamanSimulasi1 tambah = new HalamanSimulasi1(this);
-        this.jDesktopPane1.add(tambah);
-        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
-        this.setSize(tambah.getPreferredSize().width + 50, k);
-        setVisible(true);
+//         this.jDesktopPane1.removeAll();
+//        this.jDesktopPane1.setLayout(new GridLayout(1, 1));
+//        HalamanSimulasi1 tambah = new HalamanSimulasi1(this);
+//        this.jDesktopPane1.add(tambah);
+//        int k = tambah.getPreferredSize().height + 55 + this.fileMenu.getPreferredSize().height;
+//        this.setSize(tambah.getPreferredSize().width + 50, k);
+//        setVisible(true);
+        this.getContentPane().removeAll();
+    this.getContentPane().setLayout(new BorderLayout());
+    this.hal = new HalamanSimulasi1(this);
+    this.getContentPane().add(this.hal, BorderLayout.CENTER);
+    int height = this.hal.getPreferredSize().height + 50;
+    int width = this.hal.getPreferredSize().width;
+    this.setSize(width, height);
+    this.getContentPane().setVisible(false);
+    this.getContentPane().setVisible(true);
     }//GEN-LAST:event_simulasiItemActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -306,23 +400,27 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
     /**
     * @param args the command line arguments
     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HalamanUtamaForm1().setVisible(true);
-//            }
-//        });
-   // }//
-
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HalamanUtamaForm1().setVisible(true);
+            }
+        });
+    }//
+ private ADMIN.HalamanSimulasi1 hal;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private ADMIN.dataPemohonForm dataPemohonForm1;
     private javax.swing.JMenuItem editDanHapusKriteriaItem;
     private javax.swing.JMenuItem editKriteriaPemohonItem;
     private javax.swing.JMenu editMenu;
+    private ADMIN.editdanHapusKriteria editdanHapusKriteria1;
     private javax.swing.JMenu fileMenu;
+    private ADMIN.HalamanEditKriteriaPemohon halamanEditKriteriaPemohon1;
+    private ADMIN.HalamanInputKriteria halamanInputKriteria1;
+    private ADMIN.HalamanInputKriteriaPemohon halamanInputKriteriaPemohon1;
     private javax.swing.JMenuItem inputKriteriaItem;
     private javax.swing.JMenuItem inputKriteriaPemohonItem;
     private javax.swing.JMenuItem inputdataItem;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -330,6 +428,8 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem simulasiItem;
     // End of variables declaration//GEN-END:variables
 

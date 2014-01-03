@@ -110,12 +110,12 @@ public class PemohonController {
             Statement stKriteria = DatabaseConnection.getConnection().createStatement();
             String sql=(""
                     + "select sub.*,p.*,k.*,sub.bobot_subkriteria as SKOR_KRITERIA "
-                    + "from poin_kriteria_warga p "
-                    + "join kriteria k on p.id_kriteria=k.id_kriteria "+
-                    "join subkriteria sub on sub.id_kriteria = p.id_kriteria " +
-                    "AND sub.id_subkriteria = p.id_subkriteria " +
-                     "where nkk='" + o.getNKK() + "'");
-            
+                    + "from  kriteria k "
+                    + "left join poin_kriteria_warga p on p.id_kriteria=k.id_kriteria and nkk='" + o.getNKK() + "'"+
+                    "left join subkriteria sub on sub.id_kriteria = p.id_kriteria " +
+                    "AND sub.id_subkriteria = p.id_subkriteria "
+                     );
+            System.out.println(sql);
             ResultSet rsKriteria = stKriteria.executeQuery(sql);
             List<KriteriaWarga> kriteriaWargas = new ArrayList<KriteriaWarga>();
             while (rsKriteria.next()) {

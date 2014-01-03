@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author fendi
+ * @author user
  */
 public class DetailPemohonDialog extends javax.swing.JDialog {
     private DataPemohon dataPemohon;
@@ -26,6 +26,7 @@ public class DetailPemohonDialog extends javax.swing.JDialog {
         this.setTitle("Detail variabel data pemohon: "+dataPemohon.getNama_kepala_keluarga()+" "+dataPemohon.getNKK());
         DetailDataPemohonTableModel detailDataPemohonTableModel=new DetailDataPemohonTableModel(dataPemohon.getKriteriaWargaList());
         detailTabel.setModel(detailDataPemohonTableModel);
+        skorLabel.setText(dataPemohon.getHasilKeputusan()+"");
     }
     
     /**
@@ -39,6 +40,9 @@ public class DetailPemohonDialog extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         detailTabel = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        skorLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,15 +59,50 @@ public class DetailPemohonDialog extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(detailTabel);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        skorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        skorLabel.setText("jLabel2");
+
+        jLabel1.setText("Skor");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(386, Short.MAX_VALUE)
+                .addComponent(skorLabel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(skorLabel)
+                    .addComponent(jLabel1))
+                .addGap(148, 148, 148)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -74,7 +113,10 @@ public class DetailPemohonDialog extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable detailTabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel skorLabel;
     // End of variables declaration//GEN-END:variables
     class DetailDataPemohonTableModel extends AbstractTableModel{
         private List<KriteriaWarga> kwList;

@@ -13,6 +13,8 @@ import Entity.SubKriteria;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -107,8 +109,8 @@ public class KriteriaController {
     }
 
     public Kriteria getByIdKriteria(String id) throws SQLException, Exception {
-        PreparedStatement ps = (PreparedStatement) DatabaseConnection.getConnection().prepareStatement("select * from kriteria where id_kriteria like ?");
-        ps.setString(1, "%" + id + "%");
+        PreparedStatement ps = (PreparedStatement) DatabaseConnection.getConnection().prepareStatement("select * from kriteria where id_kriteria= ?");
+        ps.setString(1, id);
         ResultSet rs = ps.executeQuery();
         Kriteria data = new Kriteria();
         while (rs.next()) {
@@ -122,7 +124,7 @@ public class KriteriaController {
         return data;
     }
 
-    public void ubahDataKriteria(Kriteria dataKriteria) throws SQLException {
+    public boolean ubahDataKriteria(Kriteria dataKriteria) throws SQLException {
         String kode_kriteria = dataKriteria.getId_kriteria();
         String nama_kriteria = dataKriteria.getNama_kriteria();
         Double bobot_kriteria = dataKriteria.getBobot_kriteria();
@@ -144,29 +146,53 @@ public class KriteriaController {
             //System.out.println(sql2);
             statement.executeUpdate(sql2);
         }
+        return true;
     }
 
-    public void ubahDataKriteriaSubKriteria(Kriteria dataKriteria) throws SQLException {
+    public boolean ubahDataKriteriaSubKriteria(Kriteria dataKriteria,ArrayList<SubKriteria> subKriteriaListToRemove, JPanel panel) throws SQLException {
         String kode_kriteria = dataKriteria.getId_kriteria();
         String nama_kriteria = dataKriteria.getNama_kriteria();
         Double bobot_kriteria = dataKriteria.getBobot_kriteria();
-
+        
 
         //insert kriteria//
         String sql1 =
                 "UPDATE kriteria SET  nama_kriteria ='" + nama_kriteria + "', bobot_kriteria =" + bobot_kriteria + " WHERE id_kriteria = '" + kode_kriteria + "'";
 
         java.sql.Statement statement = DatabaseConnection.getConnection().createStatement();
-        statement.executeUpdate(sql1);
-        String id_subkriteria="";
-        for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
-            if(i!=0){
-                id_subkriteria+=",";
+        for (SubKriteria subKriteria : subKriteriaListToRemove) {
+            ResultSet rsKriteria = statement.executeQuery("select * from subkriteria "
+                    + "WHERE id_kriteria = '" + kode_kriteria + "' "
+                    + "and id_subkriteria='"+subKriteria.getId_subkriteriakriteria()+"' ");
+            if(rsKriteria.first()){
+                try{
+                    String sqlDelete="DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' "
+                        + "and id_subkriteria='"+subKriteria.getId_subkriteriakriteria()+"' "
+                        + "and (id_kriteria,id_subkriteria) not in (select id_kriteria,id_subkriteria from poin_kriteria_warga)";
+                    System.out.println(sqlDelete);
+                    int exc=statement.executeUpdate(sqlDelete);
+                    if(exc<=0){
+                        JOptionPane.showMessageDialog(panel, "Subkriteria "+subKriteria.getNama_subkriteria()+" gagal dihapus");
+                        return false;
+                    }
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(panel, "Subkriteria "+subKriteria.getNama_subkriteria()+" gagal dihapus");
+                    return false;
+                }
             }
-            id_subkriteria+="'"+dataKriteria.getSubkriteria().get(i).getId_subkriteriakriteria()+"'";
+        }
+        
+        
+        statement.executeUpdate(sql1);
+        String id_subkriteria="'-1'";
+        for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
+            id_subkriteria+=",'"+dataKriteria.getSubkriteria().get(i).getId_subkriteriakriteria()+"'";
         }
         String sql2 =
-                "DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' and id_subkriteria not in("+id_subkriteria+")";
+                "DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' "
+                + "and id_subkriteria not in("+id_subkriteria+") "
+                + "and (id_kriteria,id_subkriteria) not in (select id_kriteria,id_subkriteria from poin_kriteria_warga)";
+        System.out.println(sql2);
         statement.executeUpdate(sql2);
         //insert subkriteria
         for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
@@ -181,6 +207,7 @@ public class KriteriaController {
                 statement.executeUpdate(sql3);
             }
         }
+        return true;
     }
      public void deletepoinKriteria(Kriteria kr) throws SQLException {//ini belum selesai//
         //PreparedStatement prepare = null;

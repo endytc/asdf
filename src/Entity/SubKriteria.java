@@ -20,10 +20,10 @@ public class SubKriteria {
     }
 
     /**
-     * @param id_subkriteriakriteria the id_subkriteriakriteria to set
+     * @param id_subkriteria the id_subkriteria to set
      */
-    public void setId_subkriteriakriteria(String id_subkriteriakriteria) {
-        this.id_subkriteria = id_subkriteriakriteria;
+    public void setId_subkriteriakriteria(String id_subkriteria) {
+        this.id_subkriteria = id_subkriteria;
     }
 
     /**
