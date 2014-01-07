@@ -106,7 +106,7 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Stencil", 0, 18));
+        jLabel1.setFont(new java.awt.Font("Stencil", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SIMULASI DATA PEMOHON");
@@ -159,7 +159,6 @@ public class HalamanSimulasi1 extends javax.swing.JPanel {
                             .addGap(97, 97, 97)
                             .addComponent(sedangLabel))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel7)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rendahLabel))))

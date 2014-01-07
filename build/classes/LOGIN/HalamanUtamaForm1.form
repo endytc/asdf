@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -9,6 +9,9 @@
     <Component class="ADMIN.HalamanEditKriteriaPemohon" name="halamanEditKriteriaPemohon1">
     </Component>
     <Component class="ADMIN.editdanHapusKriteria" name="editdanHapusKriteria1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ADMIN.editdanHapusKriteria(this)"/>
+      </AuxValues>
     </Component>
     <Component class="ADMIN.dataPemohonForm" name="dataPemohonForm1">
     </Component>
@@ -144,7 +147,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="725" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>

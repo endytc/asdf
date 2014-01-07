@@ -21,6 +21,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +31,21 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
 
     private ArrayList<String> idKriterias;
     private ArrayList<Double> skorSubKriteria;
+    private ArrayList<String> idSkorSubKriteria;
     private Vector<ItemList> KriteriaSubKriteriaListItem;
+    private Vector<ItemList> KriteriaSubKriteriaListItemToDelete;
 
     /** Creates new form HalamanEditKriteriaPemohon */
     public HalamanEditKriteriaPemohon() {
         initComponents();
+        initVariabel();
+
+    }
+    private void initVariabel(){
         KriteriaSubKriteriaListItem = new Vector<ItemList>();
+        KriteriaSubKriteriaListItemToDelete = new Vector<ItemList>();
+        kriteriaCB.setEnabled(false);
+        subKriteriaCB.setEnabled(false);
         try {
             List<Kriteria> kriteria = KriteriaController.getKriteriaKontrol().getAllKriteria();
             idKriterias = new ArrayList<String>();
@@ -45,18 +55,18 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
             }
             // System.out.println(idKriterias.get(kriteriaCB.getSelectedIndex()));
             skorSubKriteria = new ArrayList<Double>();
+            idSkorSubKriteria = new ArrayList<String>();
             List<SubKriteria> subkriteria = KriteriaController.getKriteriaKontrol().getSubKriteriaById(idKriterias.get(kriteriaCB.getSelectedIndex()));
             for (SubKriteria e : subkriteria) {
                 subKriteriaCB.addItem(e.getNama_subkriteria());
                 skorSubKriteria.add(e.getBobot_subkriteria());
+                idSkorSubKriteria.add(e.getId_subkriteriakriteria());
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(HalamanInputKriteriaPemohon.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -154,7 +164,7 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(rt_rwTF, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(nkkTF, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 231, Short.MAX_VALUE)))
+                                    .addGap(0, 213, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(alamatTF, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,6 +251,11 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
         jLabel16.setText("LIST KRITERIA DAN SUB KRITERIA PEMOHON");
 
         jButton2.setText("UBAH");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("HAPUS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,21 +282,21 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
                         .addGap(25, 25, 25))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
+                            .addComponent(jButton2)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel13))
-                            .addComponent(jButton5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)))
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel16))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,12 +318,12 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
                             .addComponent(jLabel15)
                             .addComponent(subKriteriaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
-                        .addGap(37, 37, 37)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(jButton5)
+                            .addComponent(jButton1))
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -333,13 +348,19 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
 }//GEN-LAST:event_rt_rwTFActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       KriteriaSubKriteriaListItemToDelete.add(
+               KriteriaSubKriteriaListItem.get(kriteriaDanSubKriteriaList.getSelectedIndex())
+               );
+       KriteriaSubKriteriaListItem.remove(kriteriaDanSubKriteriaList.getSelectedIndex());
+       kriteriaDanSubKriteriaList.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    String nkk="";
     private void cariButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariButtonActionPerformed
+        initVariabel();
         try {
             // TODO add your handling code here:
             String nkk = nkkTF.getText();
+            
             PemohonController pc = new PemohonController();
 
             DataPemohon data = pc.getByIdWithKriteria(nkk);
@@ -356,20 +377,12 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
             //  System.out.println(data.getKriteriaWargaList().isEmpty());
             for (int i = 0; i < data.getKriteriaWargaList().size(); i++) {
                 KriteriaWarga k = data.getKriteriaWargaList().get(i);
-                ItemList item = new ItemList(k.getKriteria().getId_kriteria(), k.getKriteria().getNama_kriteria(), k.getSkor(), k.getKriteria().getSubkriteria().getFirst().getNama_subkriteria());
+                ItemList item = new ItemList(k.getKriteria().getId_kriteria(), k.getIdSubkriteria(),k.getKriteria().getNama_kriteria(), k.getSkor(), k.getKriteria().getSubkriteria().getFirst().getNama_subkriteria());
                 KriteriaSubKriteriaListItem.add(item);
             }
-
+            
             kriteriaDanSubKriteriaList.setListData(KriteriaSubKriteriaListItem);
-
-
-
-
-
-
-
-
-
+            this.nkk=nkk;
         } catch (SQLException ex) {
             Logger.getLogger(HalamanEditKriteriaPemohon.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -390,6 +403,7 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
                 for (SubKriteria e : subkriteria) {
                     subKriteriaCB.addItem(e.getNama_subkriteria());
                     skorSubKriteria.add(e.getBobot_subkriteria());
+                    idSkorSubKriteria.add(e.getId_subkriteriakriteria());
                 }
             }
             jButton5.setText("Tambah");
@@ -400,37 +414,48 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
 
     private void kriteriaDanSubKriteriaListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_kriteriaDanSubKriteriaListValueChanged
         // TODO add your handling code here:
-        ItemList item = (ItemList) kriteriaDanSubKriteriaList.getSelectedValue();
-        kriteriaCB.setSelectedItem(item.getNamaKriteria());
-        subKriteriaCB.setSelectedItem(item.getNamaSubKriteria());
-        jButton5.setText("Ubah");
-        kriteriaCB.setEnabled(false);
+        try{
+            ItemList item = (ItemList) kriteriaDanSubKriteriaList.getSelectedValue();
+            kriteriaCB.setSelectedItem(item.getNamaKriteria());
+            subKriteriaCB.setSelectedItem(item.getNamaSubKriteria());
+            jButton5.setText("Ubah");
+            kriteriaCB.setEnabled(false);
+            subKriteriaCB.setEnabled(true);
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_kriteriaDanSubKriteriaListValueChanged
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        if (jButton5.getText().equalsIgnoreCase("Tambah")) {
-            boolean status = true;
-            for (int i = 0; i < KriteriaSubKriteriaListItem.size(); i++) {
-                if (kriteriaCB.getSelectedItem().toString().equalsIgnoreCase(KriteriaSubKriteriaListItem.get(i).namaKriteria)) {
-                    status = false;
-                }
-            }
-            if (status) {
-                KriteriaSubKriteriaListItem.add(new ItemList(idKriterias.get(kriteriaCB.getSelectedIndex()), kriteriaCB.getSelectedItem().toString(), skorSubKriteria.get(subKriteriaCB.getSelectedIndex()).doubleValue(), subKriteriaCB.getSelectedItem().toString()));
-                kriteriaDanSubKriteriaList.setListData(KriteriaSubKriteriaListItem);
-            }
-        } else if (jButton5.getText().equalsIgnoreCase("Ubah")) {
-            jButton5.setText("Tambah");
-            kriteriaCB.setEnabled(true);
+        if (jButton5.getText().equalsIgnoreCase("Ubah")) {
+//            jButton5.setText("Tambah");
+//            kriteriaCB.setEnabled(true);
             ItemList item = (ItemList) KriteriaSubKriteriaListItem.get(kriteriaDanSubKriteriaList.getSelectedIndex());
             item.setNamaSubKriteria(subKriteriaCB.getSelectedItem().toString());
             item.setSkorSubKriteria(skorSubKriteria.get(subKriteriaCB.getSelectedIndex()));
+            item.setIdSubKriteria(idSkorSubKriteria.get(subKriteriaCB.getSelectedIndex()));
             kriteriaDanSubKriteriaList.repaint();
             //kriteriaDanSubKriteriaList.setListData(KriteriaSubKriteriaListItem);
 
-        }
+        }   
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            for (ItemList item : KriteriaSubKriteriaListItem) {
+                PemohonController.getPemohonKontrol().updatePoinKriteriaWarga(nkk, item.getIdKriteria(), item.getSubKriteria());
+            }
+            for (ItemList item : KriteriaSubKriteriaListItemToDelete) {
+                PemohonController.getPemohonKontrol().deletePoinKriteriaWarga(nkk, item.getIdKriteria());
+            }
+            JOptionPane.showMessageDialog(this, "data berhasil update");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "data gagal update");
+//                Logger.getLogger(HalamanEditKriteriaPemohon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alamatTF;
     private javax.swing.JButton cariButton;
@@ -472,6 +497,7 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
     private class ItemList {
 
         private String idKriteria;
+        private String idSubKriteria;
         private String namaKriteria;
         private double skorSubKriteria;
         private String namaSubKriteria;
@@ -479,8 +505,9 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
         public ItemList() {
         }
 
-        public ItemList(String idKriteria, String namaKriteria, double skorSubKriteria, String namaSubKriteria) {
+        public ItemList(String idKriteria,String idSubKriteria, String namaKriteria, double skorSubKriteria, String namaSubKriteria) {
             this.idKriteria = idKriteria;
+            this.idSubKriteria = idSubKriteria;
             this.namaKriteria = namaKriteria;
             this.skorSubKriteria = skorSubKriteria;
             this.namaSubKriteria = namaSubKriteria;
@@ -498,6 +525,12 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
          */
         public void setIdKriteria(String idKriteria) {
             this.idKriteria = idKriteria;
+        }
+        /**
+         * @param idKriteria the idKriteria to set
+         */
+        public void setIdSubKriteria(String idSubKriteria) {
+            this.idSubKriteria = idSubKriteria;
         }
 
         /**
@@ -541,7 +574,13 @@ public class HalamanEditKriteriaPemohon extends javax.swing.JPanel {
         public void setNamaSubKriteria(String namaSubKriteria) {
             this.namaSubKriteria = namaSubKriteria;
         }
-
+        public SubKriteria getSubKriteria(){
+            SubKriteria s=new SubKriteria();
+            s.setBobot_subkriteria(skorSubKriteria);
+            s.setId_subkriteriakriteria(idSubKriteria);
+            s.setNama_subkriteria(namaSubKriteria);
+            return s;
+        }
         @Override
         public String toString() {
             return getNamaKriteria() + " = " + getNamaSubKriteria();

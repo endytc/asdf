@@ -58,7 +58,7 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
         halamanInputKriteria1 = new ADMIN.HalamanInputKriteria();
         halamanInputKriteriaPemohon1 = new ADMIN.HalamanInputKriteriaPemohon();
         halamanEditKriteriaPemohon1 = new ADMIN.HalamanEditKriteriaPemohon();
-        editdanHapusKriteria1 = new ADMIN.editdanHapusKriteria();
+        editdanHapusKriteria1 = new ADMIN.editdanHapusKriteria(this);
         dataPemohonForm1 = new ADMIN.dataPemohonForm();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -87,16 +87,16 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Stencil", 0, 24));
+        jLabel3.setFont(new java.awt.Font("Stencil", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("KABUPATEN BOJONEGORO");
 
-        jLabel2.setFont(new java.awt.Font("Stencil Std", 0, 20));
+        jLabel2.setFont(new java.awt.Font("Stencil Std", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
         jLabel2.setText("SELEKSI PENERIMAAN JAMINAN KESEHATAN DAERAH");
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel1.setFont(new java.awt.Font("Janda Manatee Bubble", 1, 30));
+        jLabel1.setFont(new java.awt.Font("Janda Manatee Bubble", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setText("SISTEM PENDUKUNG KEPUTUSAN");
 
@@ -138,7 +138,7 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -243,8 +243,8 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-496)/2, 816, 496);
+        setSize(new java.awt.Dimension(816, 496));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
@@ -329,14 +329,14 @@ public class HalamanUtamaForm1 extends javax.swing.JFrame {
 //        this.setSize(tambah.getPreferredSize().width + 50, k);
 //        setVisible(true);
         this.getContentPane().removeAll();
-    this.getContentPane().setLayout(new BorderLayout());
-    this.editdanHapusKriteria1 = new editdanHapusKriteria();
-    this.getContentPane().add(this.editdanHapusKriteria1, BorderLayout.CENTER);
-    int height = this.editdanHapusKriteria1.getPreferredSize().height + 50;
-    int width = this.editdanHapusKriteria1.getPreferredSize().width;
-    this.setSize(width, height);
-    this.getContentPane().setVisible(false);
-    this.getContentPane().setVisible(true);
+        this.getContentPane().setLayout(new BorderLayout());
+        this.editdanHapusKriteria1 = new editdanHapusKriteria(this);
+        this.getContentPane().add(this.editdanHapusKriteria1, BorderLayout.CENTER);
+        int height = this.editdanHapusKriteria1.getPreferredSize().height + 50;
+        int width = this.editdanHapusKriteria1.getPreferredSize().width;
+        this.setSize(width, height);
+        this.getContentPane().setVisible(false);
+        this.getContentPane().setVisible(true);
     }//GEN-LAST:event_editDanHapusKriteriaItemActionPerformed
 
     private void editMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuActionPerformed

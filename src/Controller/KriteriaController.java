@@ -149,7 +149,7 @@ public class KriteriaController {
         return true;
     }
 
-    public boolean ubahDataKriteriaSubKriteria(Kriteria dataKriteria,ArrayList<SubKriteria> subKriteriaListToRemove, JPanel panel) throws SQLException {
+    public boolean ubahDataKriteriaSubKriteria(Kriteria dataKriteria, JPanel panel) throws SQLException {
         String kode_kriteria = dataKriteria.getId_kriteria();
         String nama_kriteria = dataKriteria.getNama_kriteria();
         Double bobot_kriteria = dataKriteria.getBobot_kriteria();
@@ -160,54 +160,7 @@ public class KriteriaController {
                 "UPDATE kriteria SET  nama_kriteria ='" + nama_kriteria + "', bobot_kriteria =" + bobot_kriteria + " WHERE id_kriteria = '" + kode_kriteria + "'";
 
         java.sql.Statement statement = DatabaseConnection.getConnection().createStatement();
-        for (SubKriteria subKriteria : subKriteriaListToRemove) {
-            ResultSet rsKriteria = statement.executeQuery("select * from subkriteria "
-                    + "WHERE id_kriteria = '" + kode_kriteria + "' "
-                    + "and id_subkriteria='"+subKriteria.getId_subkriteriakriteria()+"' ");
-            if(rsKriteria.first()){
-                try{
-                    String sqlDelete="DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' "
-                        + "and id_subkriteria='"+subKriteria.getId_subkriteriakriteria()+"' "
-                        + "and (id_kriteria,id_subkriteria) not in (select id_kriteria,id_subkriteria from poin_kriteria_warga)";
-                    System.out.println(sqlDelete);
-                    int exc=statement.executeUpdate(sqlDelete);
-                    if(exc<=0){
-                        JOptionPane.showMessageDialog(panel, "Subkriteria "+subKriteria.getNama_subkriteria()+" gagal dihapus");
-                        return false;
-                    }
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(panel, "Subkriteria "+subKriteria.getNama_subkriteria()+" gagal dihapus");
-                    return false;
-                }
-            }
-        }
-        
-        
-        statement.executeUpdate(sql1);
-        String id_subkriteria="'-1'";
-        for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
-            id_subkriteria+=",'"+dataKriteria.getSubkriteria().get(i).getId_subkriteriakriteria()+"'";
-        }
-        String sql2 =
-                "DELETE FROM subkriteria WHERE id_kriteria = '" + kode_kriteria + "' "
-                + "and id_subkriteria not in("+id_subkriteria+") "
-                + "and (id_kriteria,id_subkriteria) not in (select id_kriteria,id_subkriteria from poin_kriteria_warga)";
-        System.out.println(sql2);
-        statement.executeUpdate(sql2);
-        //insert subkriteria
-        for (int i = 0; i < dataKriteria.getSubkriteria().size(); i++) {
-            SubKriteria temp = dataKriteria.getSubkriteria().get(i);
-            try{
-                String sql3 =
-                        "insert into subkriteria values ('" + temp.getId_subkriteriakriteria() + "','" + temp.getNama_subkriteria() + "','" + temp.getBobot_subkriteria() + "','" + kode_kriteria + "')";
-                statement.executeUpdate(sql3);
-            }catch(Exception e){
-                String sql3 ="UPDATE subkriteria SET id_subkriteria ='" + temp.getId_subkriteriakriteria() + "',nama_subkriteria='" + temp.getNama_subkriteria() + "',bobot_subkriteria=" + temp.getBobot_subkriteria() + " where id_kriteria ='" + kode_kriteria + "' and id_subkriteria = '" + temp.getId_subkriteriakriteria() + "' ";
-            //System.out.println(sql2);
-                statement.executeUpdate(sql3);
-            }
-        }
-        return true;
+        return statement.executeUpdate(sql1)>0;
     }
      public void deletepoinKriteria(Kriteria kr) throws SQLException {//ini belum selesai//
         //PreparedStatement prepare = null;
@@ -221,6 +174,21 @@ public class KriteriaController {
         String kode = kr.getId_kriteria();
         PreparedStatement  ps = (PreparedStatement) DatabaseConnection.getConnection().prepareStatement("delete from subkriteria where id_kriteria = ?");
         ps.setString(1, kode);
+        ps.executeUpdate();
+    }
+     public void deletesubKriteria(SubKriteria skr,Kriteria k) throws SQLException {//ini belum selesai//
+        //PreparedStatement prepare = null;
+        String idSubKr=skr.getId_subkriteriakriteria();
+        String idKr=k.getId_kriteria();
+        PreparedStatement  ps = (PreparedStatement) DatabaseConnection.getConnection()
+                .prepareStatement("delete from poin_kriteria_warga where id_kriteria = ? and id_subkriteria = ?");
+        ps.setString(1, idKr);
+        ps.setString(2, idSubKr);
+        ps.executeUpdate();
+        ps = (PreparedStatement) DatabaseConnection.getConnection()
+                .prepareStatement("delete from subkriteria where id_kriteria = ? and id_subkriteria = ?");
+        ps.setString(1, idKr);
+        ps.setString(2, idSubKr);
         ps.executeUpdate();
     }
      public void deleteKriteria(Kriteria kr) throws SQLException {//ini belum selesai//
@@ -255,5 +223,54 @@ public class KriteriaController {
             kriteriaWarga=kw;
         }
          return kriteriaWarga;
+     }
+     
+     public void updateSubKriteria(SubKriteria s,Kriteria k) throws SQLException{
+         PreparedStatement  ps;
+         ps = (PreparedStatement) DatabaseConnection.getConnection()
+                 .prepareStatement("update subkriteria set nama_subkriteria=?,bobot_subkriteria=? "
+                 + "where id_kriteria=? and id_subkriteria=?");
+         ps.setString(1, s.getNama_subkriteria());
+         ps.setDouble(2, s.getBobot_subkriteria());
+         ps.setString(3, k.getId_kriteria());
+         ps.setString(4, s.getId_subkriteriakriteria());
+         ps.executeUpdate();
+     }
+     public void updateSubKriteria(SubKriteria sOld,SubKriteria s,Kriteria kriteria) throws SQLException{
+         PreparedStatement  ps;
+           if(!sOld.getId_subkriteriakriteria().equals(s.getId_subkriteriakriteria())){
+               ps = (PreparedStatement) DatabaseConnection.getConnection()
+                       .prepareStatement("update poin_kriteria_warga set id_subkriteria =NULL "
+                       + "where id_kriteria=? and id_subkriteria=?");
+                ps.setString(1, kriteria.getId_kriteria());
+                ps.setString(2, sOld.getId_subkriteriakriteria());
+                ps.executeUpdate();
+           } 
+           ps = (PreparedStatement) DatabaseConnection.getConnection()
+                       .prepareStatement("update subkriteria set id_subkriteria = ?,bobot_subkriteria=? "
+                   + "where id_kriteria=? and id_subkriteria=?");
+                ps.setString(1, s.getId_subkriteriakriteria());
+                ps.setDouble(2, s.getBobot_subkriteria());
+                ps.setString(3, kriteria.getId_kriteria());
+                ps.setString(4, sOld.getId_subkriteriakriteria());
+                
+                ps.executeUpdate();
+                
+           ps = (PreparedStatement) DatabaseConnection.getConnection()
+                       .prepareStatement("update poin_kriteria_warga set id_subkriteria = ? "
+                   + "where id_kriteria=? and id_subkriteria is null");
+                ps.setString(1, s.getId_subkriteriakriteria());
+                ps.setString(2, kriteria.getId_kriteria());
+                ps.executeUpdate();
+           
+     }
+     public void insertSubKriteria(SubKriteria subKriteriaNew,Kriteria k) throws SQLException{
+         String sql1 =
+                "insert into subkriteria (`ID_SUBKRITERIA`, `NAMA_SUBKRITERIA`, `BOBOT_SUBKRITERIA`, `ID_KRITERIA`)  "
+                 + "values ('" + subKriteriaNew.getId_subkriteriakriteria() + "','" + subKriteriaNew.getNama_subkriteria() + "',"
+                 + "'" + subKriteriaNew.getBobot_subkriteria() + "','"+k.getId_kriteria()+"')";
+
+        java.sql.Statement statement = DatabaseConnection.getConnection().createStatement();
+        statement.executeUpdate(sql1);
      }
 }

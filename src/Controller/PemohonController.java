@@ -218,7 +218,8 @@ public class PemohonController {
             o.setDesa(rs.getString("desa"));
             Statement stKriteria = DatabaseConnection.getConnection().createStatement();
             ResultSet rsKriteria = stKriteria.executeQuery(""
-            +"SELECT k.*, s.nama_subkriteria, p.skor_kriteria,s.bobot_subkriteria as SKOR_KRITERIA"
+            +"SELECT k.*, s.nama_subkriteria,s.bobot_subkriteria as SKOR_KRITERIA,"
+                    + "s.id_subkriteria"
                     + " FROM kriteria k "
                     +"JOIN subkriteria s ON k.id_kriteria = s.id_kriteria "
                     +"JOIN poin_kriteria_warga p ON k.id_kriteria = p.id_kriteria "
@@ -257,5 +258,31 @@ public class PemohonController {
             return false;
         }
         
+    }
+    public boolean updatePoinKriteriaWarga(String nkk,String idKriteria, SubKriteria subKriteria){
+        String sql =
+                "update poin_kriteria_warga set id_subkriteria='"+subKriteria.getId_subkriteriakriteria()+"' where "
+                + "nkk='"+nkk+"' and id_kriteria='"+idKriteria+"'";
+        try {
+//            System.out.println(sql);
+            Statement statement = DatabaseConnection.getConnection().createStatement();
+            return statement.executeUpdate(sql)>0;
+        } catch (SQLException ex) {
+            Logger.getLogger(PemohonController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    public boolean deletePoinKriteriaWarga(String nkk,String idKriteria){
+        String sql =
+                "delete from poin_kriteria_warga where "
+                + "nkk='"+nkk+"' and id_kriteria='"+idKriteria+"'";
+        try {
+//            System.out.println(sql);
+            Statement statement = DatabaseConnection.getConnection().createStatement();
+            return statement.executeUpdate(sql)>0;
+        } catch (SQLException ex) {
+            Logger.getLogger(PemohonController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 }
